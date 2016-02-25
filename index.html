@@ -50,21 +50,30 @@
 				<h1 class="title-text">Download Treehouse course in HD</h1>
 				<p class="sub-title">Wait! Still you need a subscription!</p>
 				
-				<form action="#" id="treehouse-download">
+				<form action="#" id="treehouse-download" class="form-horizontal">
 					<div class="form-group">
-						<label for=""></label>
-						<input type="text" class="form-control" name="url" id="url" placeholder="Paste URL or iTunes RSS">
+						<label for="url" class="col-md-3">Course URL: </label>
+						<div class="col-md-9">
+							<input type="text" class="form-control" name="url" id="url" placeholder="eg: https://teamtreehouse.com/library/php-functions-2">
+						</div>
 					</div>
-					<!-- <div class="form-group">
-						<input type="text" class="form-control" name="key">
-					</div> -->
+
+					<div class="form-group">
+						<label for="token" class="col-md-3">Your Token: </label>
+						<div class="col-md-9">
+							<input type="text" class="form-control" name="token" id="token" placeholder="eg: eb1e83ef-9b7e-47f5-92ba-a59bc84bd9cf">
+
+							<p class="note">*Note: Don't know your token? Paste RSS link.</p>
+						</div>
+					</div>
 
 					<button type="submit" id="submitBtn" class="btn btn-base btn-lg">Download</button>
+
 				</form>
 
 				<div class="result">
-					<p class="success_msg">Ok</p>
-					<p class="error_msg">Sorry</p>
+					<p class="success_msg"></p>
+					<p class="error_msg"></p>
 				</div>
 
 			</div>
@@ -78,16 +87,9 @@
 ============================== -->
 <script>
 
-	function getHD(url) {
-		
-		url += '&hd=true';
-
-		return url;
-
-	}
-
 	var errorMsg;
 	var submitBtn = document.getElementById('submitBtn');
+	var result = document.querySelector('.error_msg');
 
 	/******************** LEFT NAVBAR ********************/
 	submitBtn.addEventListener('click', function(e) {
@@ -95,28 +97,18 @@
 
 		// get link
 		var link = document.getElementById('url').value;
-		var result = document.querySelector('.error_msg');
+		var token = document.getElementById('token').value;
 
-		if ( link.indexOf('itpc://') > -1 ) {
-			
-			//create HD link
-			var hdLink = getHD(link);
-
-			result.style.opacity = 0;
-
-			// send query to address bar
-			window.location.href = hdLink;
-
-		} else {
-
-			errorMsg = "Please provide a valid iTunes rss feed!";
-
-			result.innerHTML = errorMsg;
-			result.style.opacity = 1;
-
+		if ( token.indexOf('itpc') > -1 ) {
+			var fetchToken = token.replace(/^.+token=(.+)/g, '$1');
+			token = fetchToken;
+			document.getElementById('token').value = token;
 		}
-	});
 
+		var linkHD = link.replace(/https?(:\/\/teamtreehouse.+)/g, 'itpc$1.rss?feed_token=' + token + '&hd=true');
+
+		window.location.href = linkHD;
+	});
 </script>
 </body>
 </html>

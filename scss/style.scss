@@ -15,10 +15,17 @@ h1 {
 	.btn {
 		margin-bottom: 20px;
 	}
+
+	.form-horizontal {
+		label {
+			margin-top: 12px;
+		}
+	}
 }
 
 .sub-title {
 	font-size: 18px;
+	margin-bottom: 40px;
 }
 
 .plr100 {
@@ -64,6 +71,16 @@ h1 {
 
 .form-group {
 	margin-bottom: 20px;
+}
+
+.note {
+	font-size: 12px;
+	text-align: left;
+	margin-top: 5px;
+	font-weight: 600;
+	color: lighten(#616161, 30%);
+	margin-bottom: 0;
+
 }
 
 .result {
