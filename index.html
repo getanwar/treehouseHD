@@ -63,7 +63,7 @@
 						<div class="col-md-9">
 							<input type="text" class="form-control" name="token" id="token" placeholder="eg: espn43-9i4e-21aa-93dcf-9as2df4vc">
 
-							<p class="note">*Note: Don't know your token? Paste RSS link.</p>
+							<p class="note">*Note: Don't know your token? Paste iTunes feed.</p>
 						</div>
 					</div>
 
@@ -72,7 +72,7 @@
 				</form>
 
 				<div class="result">
-					<p class="success_msg"></p>
+					<p class="success_msg">Download filenames: <a href=""></a></p>
 					<p class="error_msg"></p>
 				</div>
 
@@ -89,30 +89,7 @@
 <!-- =========================
      SCRIPTS
 ============================== -->
-<script>
-
-	var errorMsg;
-	var submitBtn = document.getElementById('submitBtn');
-	var result = document.querySelector('.error_msg');
-
-	/******************** LEFT NAVBAR ********************/
-	submitBtn.addEventListener('click', function(e) {
-		e.preventDefault();
-
-		// get link
-		var link = document.getElementById('url').value;
-		var token = document.getElementById('token').value;
-
-		if ( token.indexOf('itpc') > -1 ) {
-			var fetchToken = token.replace(/^.+token=(.+)/g, '$1');
-			token = fetchToken;
-			document.getElementById('token').value = token;
-		}
-
-		var linkHD = link.replace(/https?(:\/\/teamtreehouse.+)/g, 'itpc$1.rss?feed_token=' + token + '&hd=true');
-
-		window.location.href = linkHD;
-	});
-</script>
+<script src="js/jquery-1.11.3.min.js"></script>
+<script src="js/application.js"></script>
 </body>
 </html>
