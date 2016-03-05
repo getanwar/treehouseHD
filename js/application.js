@@ -11,6 +11,10 @@ function download(filename, text) {
 	el.html(filename);
 }
 
+$('#treehouse-download').find('input[name="url"]').on('focus', function() {
+	$(this).select();
+});
+
 /******************** LEFT NAVBAR ********************/
 $('#treehouse-download').on('submit', function(e) {
 	e.preventDefault();
